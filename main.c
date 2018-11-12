@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include "T6define.h"
-#include "T6proto.h"
-#include "T6screen.h"
-#include "T6game.h"
+#include "define.h"
+#include "proto.h"
+#include "screen.h"
+#include "game.h"
 #include "menu.h"
 #include "menu_config.h"
 
