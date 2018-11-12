@@ -1,6 +1,3 @@
-#define True 1
-#define False 0
-
 #define WIDHT 800
 #define HEIGHT 800
 

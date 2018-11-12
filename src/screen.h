@@ -1,10 +1,10 @@
 
-SDL_Rect clickBoard(Hex jeu){
-  int continuer = 1;
+SDL_Rect clickBoard(Dames game){
+  int pursue = 1;
   SDL_Event event;
   SDL_Rect pos;
 
-  while (continuer)
+  while (pursue)
   {
       SDL_WaitEvent(&event);
       switch(event.type)
@@ -13,13 +13,13 @@ SDL_Rect clickBoard(Hex jeu){
               SDL_Quit();
               exit(0);
           case SDL_MOUSEBUTTONUP:
-            for(int i=0; i < (jeu.sizeBoardL); i++){
-              for(int j=0; j < (jeu.sizeBoardl); j++){
+            for(int i=0; i < (game.sizeBoardL); i++){
+              for(int j=0; j < (game.sizeBoardl); j++){
                 if (event.button.button == SDL_BUTTON_LEFT
-                    && event.button.x > jeu.board[i][j].pos.x
-                    && event.button.x < jeu.board[i][j].pos.x + jeu.board[i][j].hex->w
-                    && event.button.y > jeu.board[i][j].pos.y
-                    && event.button.y < jeu.board[i][j].pos.y + jeu.board[i][j].hex->h){
+                    && event.button.x > game.board[i][j].pos.x
+                    && event.button.x < game.board[i][j].pos.x + game.board[i][j].cell->w
+                    && event.button.y > game.board[i][j].pos.y
+                    && event.button.y < game.board[i][j].pos.y + game.board[i][j].cell->h){
                       pos.x = i;
                       pos.y = j;
                       return pos;
@@ -32,101 +32,101 @@ SDL_Rect clickBoard(Hex jeu){
 
 void pause(){
   SDL_Event event;
-  int continuer = 1;
+  int pursue = 1;
 
-  while (continuer)
+  while (pursue)
   {
       SDL_WaitEvent(&event);
       switch(event.type)
       {
         case SDL_QUIT:
-          continuer = 0;
+          pursue = 0;
           break;
       }
   }
 }
 
-void updateBoard(Hex jeu, SDL_Surface *ecran){
-  for(int i=0; i < (jeu.sizeBoardL); i++){
-    for(int j=0; j < (jeu.sizeBoardl); j++){
+void updateBoard(Dames game, SDL_Surface *screen){
+  for(int i=0; i < (game.sizeBoardL); i++){
+    for(int j=0; j < (game.sizeBoardl); j++){
       if((j%2)==0){
-      jeu.board[i][j].pos.x = SCREEN_SHIFT_H + 42*i + 2*i;
-      jeu.board[i][j].pos.y = SCREEN_SHIFT_V + 49*j - 11*j;
+      game.board[i][j].pos.x = SCREEN_SHIFT_H + 42*i + 2*i;
+      game.board[i][j].pos.y = SCREEN_SHIFT_V + 49*j - 11*j;
       }
       else{
-      jeu.board[i][j].pos.x = SCREEN_SHIFT_H + 42*i -21 + 2*i;
-      jeu.board[i][j].pos.y = SCREEN_SHIFT_V + 49*j - 11*j;
+      game.board[i][j].pos.x = SCREEN_SHIFT_H + 42*i -21 + 2*i;
+      game.board[i][j].pos.y = SCREEN_SHIFT_V + 49*j - 11*j;
       }
-      switch (jeu.board[i][j].joueur) {
+      switch (game.board[i][j].player) {
         case 0:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_0.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_0.png");
           break;
         case 1:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_1.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_1.png");
           break;
         case 2:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_2.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_2.png");
           break;
         case 3:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_3.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_3.png");
           break;
         case 4:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_4.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_4.png");
           break;
         case 5:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_5.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_5.png");
           break;
         case 6:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_6.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_6.png");
           break;
         case 8:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_8.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_8.png");
           break;
         case 9:
-        jeu.board[i][j].hex = IMG_Load("../img/Hex_9.png");
+        game.board[i][j].cell = IMG_Load("../img/Cell_9.png");
           break;
         case 11:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_11.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_11.png");
           break;
         case 12:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_12.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_12.png");
           break;
         case 13:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_13.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_13.png");
           break;
         case 14:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_14.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_14.png");
           break;
         case 15:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_15.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_15.png");
           break;
         case 16:
-          jeu.board[i][j].hex = IMG_Load("../img/Hex_16.png");
+          game.board[i][j].cell = IMG_Load("../img/Cell_16.png");
           break;
-        default: jeu.board[i][j].hex = IMG_Load("../img/Hex_99.png");
+        default: game.board[i][j].cell = IMG_Load("../img/Cell_99.png");
       }
-      SDL_BlitSurface(jeu.board[i][j].hex, NULL, ecran, &jeu.board[i][j].pos);
+      SDL_BlitSurface(game.board[i][j].cell, NULL, screen, &game.board[i][j].pos);
     }
   }
-displayContour(ecran);
+displayFrame(screen);
 }
 
-void updateScreen(SDL_Surface *ecran){
-  SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
-  SDL_Flip(ecran);
+void updateScreen(SDL_Surface *screen){
+  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+  SDL_Flip(screen);
 }
 
-void displayContour(SDL_Surface *ecran){
-  SDL_Surface *contour;
+void displayFrame(SDL_Surface *screen){
+  SDL_Surface *frame;
   SDL_Rect pos;
-  contour = IMG_Load("../img/Cadre.png");
+  frame = IMG_Load("../img/Frame_6.png");
   pos.x = SCREEN_SHIFT_H -8;
   pos.y = SCREEN_SHIFT_V -6;
-  SDL_BlitSurface(contour, NULL, ecran, &pos);
+  SDL_BlitSurface(frame, NULL, screen, &pos);
 }
 
-void rafraichirjeu(Hex jeu, SDL_Surface *ecran){
-  SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
-  updateBoard(jeu, ecran);
-  SDL_Flip(ecran);
+void updateGame(Dames game, SDL_Surface *screen){
+  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+  updateBoard(game, screen);
+  SDL_Flip(screen);
 }
