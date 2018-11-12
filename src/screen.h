@@ -59,51 +59,51 @@ void updateBoard(Hex jeu, SDL_Surface *ecran){
       }
       switch (jeu.board[i][j].joueur) {
         case 0:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_0.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_0.png");
           break;
         case 1:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_1.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_1.png");
           break;
         case 2:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_2.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_2.png");
           break;
         case 3:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_3.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_3.png");
           break;
         case 4:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_4.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_4.png");
           break;
         case 5:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_5.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_5.png");
           break;
         case 6:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_6.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_6.png");
           break;
         case 8:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_8.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_8.png");
           break;
         case 9:
-        jeu.board[i][j].hex = IMG_Load("img/Hex_9.png");
+        jeu.board[i][j].hex = IMG_Load("../img/Hex_9.png");
           break;
         case 11:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_11.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_11.png");
           break;
         case 12:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_12.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_12.png");
           break;
         case 13:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_13.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_13.png");
           break;
         case 14:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_14.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_14.png");
           break;
         case 15:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_15.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_15.png");
           break;
         case 16:
-          jeu.board[i][j].hex = IMG_Load("img/Hex_16.png");
+          jeu.board[i][j].hex = IMG_Load("../img/Hex_16.png");
           break;
-        default: jeu.board[i][j].hex = IMG_Load("img/Hex_99.png");
+        default: jeu.board[i][j].hex = IMG_Load("../img/Hex_99.png");
       }
       SDL_BlitSurface(jeu.board[i][j].hex, NULL, ecran, &jeu.board[i][j].pos);
     }
@@ -119,7 +119,7 @@ void updateScreen(SDL_Surface *ecran){
 void displayContour(SDL_Surface *ecran){
   SDL_Surface *contour;
   SDL_Rect pos;
-  contour = IMG_Load("img/Cadre.png");
+  contour = IMG_Load("../img/Cadre.png");
   pos.x = SCREEN_SHIFT_H -8;
   pos.y = SCREEN_SHIFT_V -6;
   SDL_BlitSurface(contour, NULL, ecran, &pos);
