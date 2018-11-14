@@ -19,6 +19,9 @@ screen = SDL_SetVideoMode(800, 800, 32, SDL_HWSURFACE);
 SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
 
 SDL_Flip(screen);
+char framechar="../img/Frame_6.png";
+int part[6]={9,9,2,9,9,1};
+int nbplayers=2;
 
 menu_main(screen);
 

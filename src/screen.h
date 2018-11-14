@@ -116,10 +116,10 @@ void updateScreen(SDL_Surface *screen){
   SDL_Flip(screen);
 }
 
-void displayFrame(SDL_Surface *screen){
+void displayFrame(SDL_Surface *screen, char framechar){
   SDL_Surface *frame;
   SDL_Rect pos;
-  frame = IMG_Load("../img/Frame_6.png");
+  frame = IMG_Load(framechar);
   pos.x = SCREEN_SHIFT_H -8;
   pos.y = SCREEN_SHIFT_V -6;
   SDL_BlitSurface(frame, NULL, screen, &pos);
