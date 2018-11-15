@@ -1,5 +1,5 @@
-int part[6]={9,1,9,9,2,9};
-int nbplayers=2;
+int part[6]={1,1,2,2,3,3};
+int nbplayers=3;
 
 void menu_main(SDL_Surface *screen);
 void regles0(SDL_Surface *screen);
@@ -34,6 +34,10 @@ void settings(SDL_Surface *screen){
     initButton(400, 300, "Yolo", "../img/Button_Exit.png", exit),
 
   };
+
+  framechar = "../img/Frame_2_2.png";
+  part[0]=9; part[1]=1; part[2]=9; part[3]=9; part[4]=2; part[5]=9;
+  nbplayers=2;
 
   displayMenu(menu, screen, 2);
   waitEvent(menu, screen, 2);
