@@ -1,3 +1,4 @@
+char *framechar = "../img/Frame_2_0.png";
 
 SDL_Rect clickBoard(Dames game){
   int pursue = 1;
@@ -119,7 +120,7 @@ void updateScreen(SDL_Surface *screen){
 void displayFrame(SDL_Surface *screen){
   SDL_Surface *frame;
   SDL_Rect pos;
-  frame = IMG_Load("../img/Frame_6.png");
+  frame = IMG_Load(framechar);
   pos.x = SCREEN_SHIFT_H -8;
   pos.y = SCREEN_SHIFT_V -6;
   SDL_BlitSurface(frame, NULL, screen, &pos);

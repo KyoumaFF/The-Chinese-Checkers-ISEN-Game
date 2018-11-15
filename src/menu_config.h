@@ -1,3 +1,6 @@
+int part[6]={1,9,9,2,9,9};
+int nbplayers=2;
+
 void menu_main(SDL_Surface *screen);
 void regles0(SDL_Surface *screen);
 void regles1(SDL_Surface *screen);
@@ -9,7 +12,7 @@ void regles6(SDL_Surface *screen);
 void regles7(SDL_Surface *screen);
 void regles8(SDL_Surface *screen);
 void settings(SDL_Surface *screen);
-void game();
+void game(SDL_Surface *screen, int part[6], int nbplayers);
 
 void menu_main(SDL_Surface *screen){
   Button menu[4] = {
@@ -144,9 +147,11 @@ void regles8(SDL_Surface *screen){
   waitEvent(menu, screen, 3);
 }
 
+<<<<<<< HEAD
 void game(SDL_Surface *screen){
-    int part[6]={9,9,2,9,9,1};
-    int nbplayers=2;
+=======
+void game(SDL_Surface *screen, int part[6], int nbplayers){
+>>>>>>> 5824458b9b172a0179c35c82fb52f7be71b5d03f
     Dames game;
 
     game = initDames(17,13,part[0],part[1],part[2],part[3],part[4],part[5]);
