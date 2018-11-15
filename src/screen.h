@@ -1,4 +1,4 @@
-char *framechar = "../img/Frame_2_0.png";
+char *framechar = "../img/Frame_2_2.png";
 
 SDL_Rect clickBoard(Dames game){
   int pursue = 1;
