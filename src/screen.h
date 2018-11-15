@@ -117,7 +117,7 @@ void updateScreen(SDL_Surface *screen){
   SDL_Flip(screen);
 }
 
-void displayFrame(SDL_Surface *screen){
+void displayFrame(SDL_Surface *screen, char framechar){
   SDL_Surface *frame;
   SDL_Rect pos;
   frame = IMG_Load(framechar);
