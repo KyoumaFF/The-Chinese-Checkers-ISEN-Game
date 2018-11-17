@@ -1,5 +1,3 @@
-char *framechar = "../img/Frame_6.png";
-
 SDL_Rect clickBoard(Dames game){
   int pursue = 1;
   SDL_Event event;
@@ -63,22 +61,22 @@ void updateBoard(Dames game, SDL_Surface *screen){
           game.board[i][j].cell = IMG_Load("../img/Cell_0.png");
           break;
         case 1:
-          game.board[i][j].cell = IMG_Load("../img/Cell_1.png");
+          game.board[i][j].cell = IMG_Load(cellchar[0][0]);
           break;
         case 2:
-          game.board[i][j].cell = IMG_Load("../img/Cell_2.png");
+          game.board[i][j].cell = IMG_Load(cellchar[1][0]);
           break;
         case 3:
-          game.board[i][j].cell = IMG_Load("../img/Cell_3.png");
+          game.board[i][j].cell = IMG_Load(cellchar[2][0]);
           break;
         case 4:
-          game.board[i][j].cell = IMG_Load("../img/Cell_4.png");
+          game.board[i][j].cell = IMG_Load(cellchar[3][0]);
           break;
         case 5:
-          game.board[i][j].cell = IMG_Load("../img/Cell_5.png");
+          game.board[i][j].cell = IMG_Load(cellchar[4][0]);
           break;
         case 6:
-          game.board[i][j].cell = IMG_Load("../img/Cell_6.png");
+          game.board[i][j].cell = IMG_Load(cellchar[5][0]);
           break;
         case 8:
           game.board[i][j].cell = IMG_Load("../img/Cell_8.png");
@@ -87,22 +85,22 @@ void updateBoard(Dames game, SDL_Surface *screen){
         game.board[i][j].cell = IMG_Load("../img/Cell_9.png");
           break;
         case 11:
-          game.board[i][j].cell = IMG_Load("../img/Cell_11.png");
+          game.board[i][j].cell = IMG_Load(cellchar[0][1]);
           break;
         case 12:
-          game.board[i][j].cell = IMG_Load("../img/Cell_12.png");
+          game.board[i][j].cell = IMG_Load(cellchar[1][1]);
           break;
         case 13:
-          game.board[i][j].cell = IMG_Load("../img/Cell_13.png");
+          game.board[i][j].cell = IMG_Load(cellchar[2][1]);
           break;
         case 14:
-          game.board[i][j].cell = IMG_Load("../img/Cell_14.png");
+          game.board[i][j].cell = IMG_Load(cellchar[3][1]);
           break;
         case 15:
-          game.board[i][j].cell = IMG_Load("../img/Cell_15.png");
+          game.board[i][j].cell = IMG_Load(cellchar[4][1]);
           break;
         case 16:
-          game.board[i][j].cell = IMG_Load("../img/Cell_16.png");
+          game.board[i][j].cell = IMG_Load(cellchar[5][1]);
           break;
         default: game.board[i][j].cell = IMG_Load("../img/Cell_99.png");
       }
@@ -117,7 +115,7 @@ void updateScreen(SDL_Surface *screen){
   SDL_Flip(screen);
 }
 
-void displayFrame(SDL_Surface *screen, char framechar){
+void displayFrame(SDL_Surface *screen){
   SDL_Surface *frame;
   SDL_Rect pos;
   frame = IMG_Load(framechar);

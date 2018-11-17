@@ -13,7 +13,7 @@ typedef struct {
 SDL_Rect click(Dames game);
 void updateBoard(Dames game, SDL_Surface *screen);
 void updateScreen(SDL_Surface *screen);
-void displayFrame(SDL_Surface *screen, char framechar);
+void displayFrame(SDL_Surface *screen);
 void updateGame(Dames game, SDL_Surface *screen);
 
 Dames initDames(int n, int m, int p1, int p2, int p3, int p4, int p5, int p6);
