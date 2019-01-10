@@ -12,7 +12,7 @@
 
 // clear && gcc main.c `sdl-config --cflags --libs` -lSDL_image  && ./a.out
 
-void main(){
+void main(int argc, char **argv){
 
 SDL_Surface *screen = NULL;
 SDL_Init(SDL_INIT_VIDEO);

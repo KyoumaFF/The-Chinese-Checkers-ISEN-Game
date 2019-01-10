@@ -6,13 +6,23 @@ void set_game_nbplayers(SDL_Surface *screen);
 void nbplayersEq2(SDL_Surface *screen);void nbplayersEq3(SDL_Surface *screen);
 void nbplayersEq4(SDL_Surface *screen);void nbplayersEq6(SDL_Surface *screen);
 
-void set_bordMode(SDL_Surface *screen);
-void ModeEq2_0(SDL_Surface *screen);void ModeEq2_1(SDL_Surface *screen);
-void ModeEq2_2(SDL_Surface *screen);void ModeEq3(SDL_Surface *screen);
-void ModeEq4_0(SDL_Surface *screen);void ModeEq4_1(SDL_Surface *screen);
-void ModeEq4_2(SDL_Surface *screen);void ModeEq6(SDL_Surface *screen);
+void set_game_nbparts(SDL_Surface *screen);
+void nbpartsEq1(SDL_Surface *screen);
+void nbpartsEq2(SDL_Surface *screen);
+void nbpartsEq3(SDL_Surface *screen);
+
+void set_boardParts(SDL_Surface *screen);
+void comptplus_modepart(SDL_Surface *screen);
+void comptminus_modepart(SDL_Surface *screen);
+void validparts(SDL_Surface *screen);
+
+void set_boardMode(SDL_Surface *screen);
 
 void set_playersStates(SDL_Surface *screen);
+void comptplus_player(SDL_Surface *screen);
+void comptminus_player(SDL_Surface *screen);
+void validcolor(SDL_Surface *screen);
+void echangStates(int comptcolor,int comptplayer);
 
 void game(SDL_Surface *screen);
 void regles0(SDL_Surface *screen);
@@ -36,7 +46,6 @@ void menu_main(SDL_Surface *screen){
   displayMenu(menu, screen, 4);
   waitEvent(menu, screen, 4);
 }
-
 
 void settings(SDL_Surface *screen){
   int inter=14;
@@ -122,142 +131,216 @@ void set_game_nbplayers(SDL_Surface *screen){
   waitEvent(menu, screen, 5);
 }
 
-void nbplayersEq2(SDL_Surface *screen){nbplayers=2;set_bordMode(screen);}
-void nbplayersEq3(SDL_Surface *screen){nbplayers=3;set_bordMode(screen);}
-void nbplayersEq4(SDL_Surface *screen){nbplayers=4;set_bordMode(screen);}
-void nbplayersEq6(SDL_Surface *screen){nbplayers=6;set_bordMode(screen);}
+void nbplayersEq2(SDL_Surface *screen){nbplayers=2;set_game_nbparts(screen);}
+void nbplayersEq3(SDL_Surface *screen){nbplayers=3;set_game_nbparts(screen);}
+void nbplayersEq4(SDL_Surface *screen){nbplayers=4;set_game_nbparts(screen);}
+void nbplayersEq6(SDL_Surface *screen){nbplayers=6;set_game_nbparts(screen);}
 
-void set_bordMode(SDL_Surface *screen){
-if(nbplayers==2){
-    int inter=16;
-    int btnHeight = 90, btnWidth = 90;
-    int xm = (screen->w)/2;
-    int ym = (screen->h)/2 - btnHeight/2;
+void set_game_nbparts(SDL_Surface *screen){
+  int inter=16;
+  int btnHeight = 90, btnWidth = 90;
+  int xm = (screen->w)/2;
+  int ym = (screen->h)/2 - btnHeight/2;
 
-    Button menu[3] = {
-      initButtonRect(xm - (2*btnWidth) - 1*inter - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "2_0", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq2_0),
-      initButtonRect(xm - (1*btnWidth) - 0*inter - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "2_1", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq2_1),
-      initButtonRect(xm + (0*btnWidth) + 0*inter + inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "2_2", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq2_2)
-    };
-
-    SDL_Surface *text = initText("Parametrage du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
-    SDL_Surface *text_nbplayers = initText("Mode de Jeu", 30, 0x000000, TTF_STYLE_ITALIC);
-
-    displayColor(screen, 0xE9DBAD);
-    displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
-    displayText(screen, text_nbplayers, (screen->w)/2 - (text_nbplayers->w)/2 , 270);
-    displayMenu(menu, screen, 3);
-
-    waitEvent(menu, screen, 3);
-}
-if(nbplayers==3){
-    int inter=16;
-    int btnHeight = 90, btnWidth = 90;
-    int xm = (screen->w)/2;
-    int ym = (screen->h)/2 - btnHeight/2;
-
-    Button menu[1] = {
-      initButtonRect(xm - (2*btnWidth) - 1*inter - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "3", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq6)
-
-    };
-
-    SDL_Surface *text = initText("Parametrage du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
-    SDL_Surface *text_nbplayers = initText("Mode de Jeu", 30, 0x000000, TTF_STYLE_ITALIC);
-
-    displayColor(screen, 0xE9DBAD);
-    displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
-    displayText(screen, text_nbplayers, (screen->w)/2 - (text_nbplayers->w)/2 , 270);
-    displayMenu(menu, screen, 1);
-
-    waitEvent(menu, screen, 1);
-}
-if(nbplayers==4){
-    int inter=16;
-    int btnHeight = 90, btnWidth = 90;
-    int xm = (screen->w)/2;
-    int ym = (screen->h)/2 - btnHeight/2;
-
-    Button menu[3] = {
-      initButtonRect(xm - (2*btnWidth) - 1*inter - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "4_0", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq4_0),
-      initButtonRect(xm - (1*btnWidth) - 0*inter - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "4_1", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq4_1),
-      initButtonRect(xm + (0*btnWidth) + 0*inter + inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "4_2", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq4_2)
-
-    };
-
-    SDL_Surface *text = initText("Parametrage du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
-    SDL_Surface *text_nbplayers = initText("Mode de Jeu", 30, 0x000000, TTF_STYLE_ITALIC);
-
-    displayColor(screen, 0xE9DBAD);
-    displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
-    displayText(screen, text_nbplayers, (screen->w)/2 - (text_nbplayers->w)/2 , 270);
-    displayMenu(menu, screen, 3);
-
-    waitEvent(menu, screen, 3);
-}
-if(nbplayers==6){
-    int inter=16;
-    int btnHeight = 90, btnWidth = 90;
-    int xm = (screen->w)/2;
-    int ym = (screen->h)/2 - btnHeight/2;
-
-    Button menu[1] = {
-      initButtonRect(xm - (2*btnWidth) - 1*inter - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "6", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, ModeEq6)
-    };
-
-    SDL_Surface *text = initText("Parametrage du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
-    SDL_Surface *text_nbplayers = initText("Mode de Jeu", 30, 0x000000, TTF_STYLE_ITALIC);
-
-    displayColor(screen, 0xE9DBAD);
-    displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
-    displayText(screen, text_nbplayers, (screen->w)/2 - (text_nbplayers->w)/2 , 270);
-    displayMenu(menu, screen, 1);
-
-    waitEvent(menu, screen, 1);
-}
-}
-
-void ModeEq2_0(SDL_Surface *screen){framechar="../img/Frame_2_0.png";set_playersStates(screen);}
-void ModeEq2_1(SDL_Surface *screen){framechar="../img/Frame_2_1.png";set_playersStates(screen);}
-void ModeEq2_2(SDL_Surface *screen){framechar="../img/Frame_2_2.png";set_playersStates(screen);}
-void ModeEq4_0(SDL_Surface *screen){framechar="../img/Frame_4_0.png";set_playersStates(screen);}
-void ModeEq4_1(SDL_Surface *screen){framechar="../img/Frame_4_1.png";set_playersStates(screen);}
-void ModeEq4_2(SDL_Surface *screen){framechar="../img/Frame_4_2.png";set_playersStates(screen);}
-void ModeEq6(SDL_Surface *screen){framechar="../img/Frame_6.png";set_playersStates(screen);}
-
-void set_playersStates(SDL_Surface *screen){
-  char text_nb[2];
-  sprintf(text_nb, "%d", nbplayers);
-
-  int btnHeight = 90, btnWidth = 189;
-  int xm = (screen->w)/2 - btnWidth/2;
-
-  int partpos[12]={314,98,511,250,511,440,314,592,115,440,115,250};
-
-  Button menu[1] = {
-    initButtonImg(screen->w - 40 - btnWidth, screen->h - 40 - btnHeight, "../img/Button_Back.png", settings),
-
+  if(nbplayers==2){
+  Button menu[3] = {
+    initButtonRect(xm - (1*btnWidth) - 1*inter - btnWidth/2, ym, btnWidth, btnHeight, 0xFFC0C0, "1", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, nbpartsEq1),
+    initButtonRect(xm - btnWidth/2                         , ym, btnWidth, btnHeight, 0xFFC0C0, "2", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, nbpartsEq2),
+    initButtonRect(xm + 1*inter + btnWidth/2               , ym, btnWidth, btnHeight, 0xFFC0C0, "3", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, nbpartsEq3)
   };
 
-  SDL_Surface *text = initText("Configuration actuelle du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
-  SDL_Surface *text_nbplayers = initText("Nombre de Joueurs:", 24, 0x000000, TTF_STYLE_NORMAL);
-  SDL_Surface *text2_nbplayers = initText(text_nb, 24, 0x000000, TTF_STYLE_NORMAL);
+  SDL_Surface *text = initText("Parametrage du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
+  SDL_Surface *text_nbplayers = initText("Nombre de Pointes par Joueurs", 30, 0x000000, TTF_STYLE_ITALIC);
 
   displayColor(screen, 0xE9DBAD);
   displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
-  displayText(screen, text_nbplayers, 40 , 140);
-  displayText(screen, text2_nbplayers, 260 , 141);
-  displayMenu(menu, screen, 1);
+  displayText(screen, text_nbplayers, (screen->w)/2 - (text_nbplayers->w)/2 , 270);
+  displayMenu(menu, screen, 3);
+
+  waitEvent(menu, screen, 3);
+  }
+
+  if(nbplayers==3){
+  Button menu[2] = {
+    initButtonRect(xm - 1*btnWidth - inter/2, ym, btnWidth, btnHeight, 0xFFC0C0, "1", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, nbpartsEq1),
+    initButtonRect(xm + inter/2             , ym, btnWidth, btnHeight, 0xFFC0C0, "2", 32, 0xFFFFFF, TTF_STYLE_UNDERLINE, nbpartsEq2)
+  };
+
+  SDL_Surface *text = initText("Parametrage du jeu", 36, 0x000000, TTF_STYLE_UNDERLINE);
+  SDL_Surface *text_nbplayers = initText("Nombre de Pointes par Joueurs", 30, 0x000000, TTF_STYLE_ITALIC);
+
+  displayColor(screen, 0xE9DBAD);
+  displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
+  displayText(screen, text_nbplayers, (screen->w)/2 - (text_nbplayers->w)/2 , 270);
+  displayMenu(menu, screen, 2);
+
+  waitEvent(menu, screen, 2);
+  }
+
+  if(nbplayers==4){nbpartsEq1(screen);};
+  if(nbplayers==6){nbpartsEq1(screen);};
+};
+
+void nbpartsEq1(SDL_Surface *screen){modeparts=1;set_boardParts(screen);}
+void nbpartsEq2(SDL_Surface *screen){modeparts=2;set_boardParts(screen);}
+void nbpartsEq3(SDL_Surface *screen){modeparts=3;set_boardParts(screen);}
 
 
-  displayImg(screen, 197, 243, "../img/Center_0.png");
-  for(int i=0; i<6; i++){
-    if (part[i]!=9){
-      displayImg(screen, partpos[i*2], partpos[(i*2)+1], partchar[part[i]][i]);
+void set_boardParts(SDL_Surface *screen){
+  displayColor(screen, 0xE9DBAD);
+  SDL_Surface *text = initText("Nombre de Sommets par Joueurs", 36, 0x000000, TTF_STYLE_UNDERLINE);
+  displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
+
+  int btnHeight = 45, btnWidth = 45;
+
+  int inter=16;
+  int xm = (screen->w)/2;
+  int ym = (screen->h)/2;
+
+  Button menu[3] = {
+
+    initButtonRect(xm-289          , ym + 20 - btnHeight/2, btnWidth, btnHeight, 0x000000, "<", 32, 0xFFFFFF, TTF_STYLE_ITALIC, comptminus_modepart),
+    initButtonRect(xm+289 -btnWidth, ym + 20 - btnHeight/2, btnWidth, btnHeight, 0x000000, ">", 32, 0xFFFFFF, TTF_STYLE_ITALIC, comptplus_modepart),
+    initButtonRect(xm+289 -btnWidth, ym + 342- btnHeight  , btnWidth, btnHeight, 0x000000, "OK", 28, 0xFFFFFF, TTF_STYLE_ITALIC, validparts),
+  };
+  switch(nbplayers){
+    case 2:
+      switch (modeparts){
+        case 1: limitmodeparts=3;configDef=(comptmodeparts-1);displayImg(screen, xm-289 , ym-311, modegameschar[comptmodeparts-1]);break;
+        case 2: limitmodeparts=6;configDef=(comptmodeparts+2);displayImg(screen, xm-289 , ym-311, modegameschar[comptmodeparts+2]);break;
+        case 3: limitmodeparts=2;configDef=(comptmodeparts+8);displayImg(screen, xm-289 , ym-311, modegameschar[comptmodeparts+8]);break;
+      }
+      displayMenu(menu, screen, 3);
+      waitEvent(menu, screen, 3);
+      break;
+    case 3:
+      limitmodeparts=1;
+      if(modeparts==1){configDef=(comptmodeparts+10);}
+      else{configDef=(comptmodeparts+11);}
+      set_boardMode(screen);break;
+    case 4:
+      limitmodeparts=3;
+      configDef=(comptmodeparts+12);
+      displayImg(screen, xm-289 , ym-311, modegameschar[comptmodeparts+12]);
+      displayMenu(menu, screen, 3);
+      waitEvent(menu, screen, 3);
+      break;
+    case 6:
+      limitmodeparts=1;
+      configDef=(comptmodeparts+15);
+      set_boardMode(screen);break;
+  }
+}
+
+void comptplus_modepart(SDL_Surface *screen){
+  if(comptmodeparts>=limitmodeparts){comptmodeparts=1;}
+  else{comptmodeparts+=1;}
+  set_boardParts(screen);}
+
+void comptminus_modepart(SDL_Surface *screen){
+  if(comptmodeparts<=1){comptmodeparts=limitmodeparts;}
+  else{comptmodeparts-=1;}
+  set_boardParts(screen);}
+
+void validparts(SDL_Surface *screen){set_boardMode(screen);}
+
+void set_boardMode(SDL_Surface *screen){
+  switch(configDef){
+    case 0: framechar="../img/Frame_2_A.png"; part[0]=9; part[1]=9; part[2]=2; part[3]=9; part[4]=9; part[5]=1;break;
+    case 1: framechar="../img/Frame_2_B.png"; part[0]=1; part[1]=9; part[2]=9; part[3]=2; part[4]=9; part[5]=9;break;
+    case 2: framechar="../img/Frame_2_C.png"; part[0]=9; part[1]=1; part[2]=9; part[3]=9; part[4]=2; part[5]=9;break;
+    case 3: framechar="../img/Frame_4_A.png"; part[0]=1; part[1]=9; part[2]=2; part[3]=2; part[4]=9; part[5]=1;break;
+    case 4: framechar="../img/Frame_4_B.png"; part[0]=1; part[1]=1; part[2]=9; part[3]=2; part[4]=2; part[5]=9;break;
+    case 5: framechar="../img/Frame_4_C.png"; part[0]=9; part[1]=1; part[2]=1; part[3]=9; part[4]=2; part[5]=2;break;
+    case 6: framechar="../img/Frame_4_B.png"; part[0]=1; part[1]=2; part[2]=9; part[3]=2; part[4]=1; part[5]=9;break;
+    case 7: framechar="../img/Frame_4_C.png"; part[0]=9; part[1]=1; part[2]=2; part[3]=9; part[4]=2; part[5]=1;break;
+    case 8: framechar="../img/Frame_4_A.png"; part[0]=1; part[1]=9; part[2]=1; part[3]=2; part[4]=9; part[5]=2;break;
+    case 9: framechar="../img/Frame_6.png"; part[0]=1; part[1]=1; part[2]=2; part[3]=2; part[4]=2; part[5]=1;break;
+    case 10: framechar="../img/Frame_6.png"; part[0]=1; part[1]=2; part[2]=1; part[3]=2; part[4]=1; part[5]=2;break;
+    case 11: framechar="../img/Frame_6.png"; part[0]=1; part[1]=0; part[2]=2; part[3]=0; part[4]=3; part[5]=0;break;
+    case 12: framechar="../img/Frame_6.png"; part[0]=1; part[1]=1; part[2]=2; part[3]=2; part[4]=3; part[5]=3;break;
+    case 13: framechar="../img/Frame_4_B.png"; part[0]=1; part[1]=2; part[2]=9; part[3]=3; part[4]=4; part[5]=9;break;
+    case 14: framechar="../img/Frame_4_C.png"; part[0]=9; part[1]=1; part[2]=2; part[3]=9; part[4]=3; part[5]=4;break;
+    case 15: framechar="../img/Frame_4_A.png"; part[0]=4; part[1]=9; part[2]=1; part[3]=2; part[4]=9; part[5]=3;break;
+    case 16: framechar="../img/Frame_6.png"; part[0]=1; part[1]=2; part[2]=3; part[3]=4; part[4]=5; part[5]=6;break;
+  }
+  set_playersStates(screen);
+}
+
+void set_playersStates(SDL_Surface *screen){
+
+  SDL_Surface *text = initText("Choix des couleurs par joueurs", 36, 0x000000, TTF_STYLE_UNDERLINE);
+  displayColor(screen, 0xE9DBAD);
+  displayText(screen, text, (screen->w)/2 - (text->w)/2 , 40);
+
+  char text_nb[2];
+  int cadre=(screen->h) - 90 - 20;
+  int intercadre=cadre/(nbplayers+1);
+
+  for(int i=1; i<(nbplayers+1); i++){
+    sprintf(text_nb, "%d", i);
+
+    SDL_Surface *text_nbplayers = initText("Joueur ", 24, 0x000000, TTF_STYLE_NORMAL);
+    SDL_Surface *text2_nbplayers = initText(text_nb, 24, 0x000000, TTF_STYLE_NORMAL);
+    displayText(screen, text_nbplayers, 200 , 90 + intercadre*i);
+    displayText(screen, text2_nbplayers, 280 , 90 + intercadre*i);
+
+    if(i<comptplayer){
+      displayImg(screen, 320 , 90 + intercadre*i - 13, cellchar[i][0]);
     }
   }
-  displayImg(screen, (screen->w - 585)/2, screen->h - 668 - 40, framechar);
 
-  waitEvent(menu, screen, 1);
+  if(comptplayer<=nbplayers){
+    int btnHeight = 45, btnWidth = 45;
+
+    Button menu[3] = {
+
+      initButtonRect(420, 90 + intercadre*comptplayer - 10, btnWidth, btnHeight, 0x000000, "<", 32, 0xFFFFFF, TTF_STYLE_ITALIC, comptminus_player),
+      initButtonRect(480, 90 + intercadre*comptplayer - 10, btnWidth, btnHeight, 0x000000, ">", 32, 0xFFFFFF, TTF_STYLE_ITALIC, comptplus_player),
+      initButtonRect(540, 90 + intercadre*comptplayer - 10, btnWidth, btnHeight, 0x000000, "OK", 28, 0xFFFFFF, TTF_STYLE_ITALIC, validcolor),
+    };
+    displayImg(screen, 320 , 90 + intercadre*comptplayer - 13, cellchar[comptcolor][0]);
+
+    displayMenu(menu, screen, 3);
+
+    waitEvent(menu, screen, 3);
+  }
+  else{
+    comptcolor=1;
+    comptplayer=1;
+    menu_main(screen);
+  }
+}
+
+void comptplus_player(SDL_Surface *screen){
+  if (comptcolor==6){comptcolor=comptplayer;}
+  else{comptcolor+=1;}
+  set_playersStates(screen);}
+
+void comptminus_player(SDL_Surface *screen){
+  if(comptcolor==comptplayer){comptcolor=6;}
+  else{comptcolor-=1;}
+  set_playersStates(screen);}
+
+void validcolor(SDL_Surface *screen){
+  echangStates(comptplayer,comptcolor);
+  comptplayer+=1;
+  comptcolor=comptplayer;
+  set_playersStates(screen);
+}
+
+void echangStates(int comptcolor,int comptplayer){
+  char temp[6][20],temp2[2][20];
+  for(int i=0;i<6;i++){
+    strcpy(temp[i],partchar[comptcolor][i]);
+    strcpy(partchar[comptcolor][i],partchar[comptplayer][i]);
+    strcpy(partchar[comptplayer][i],temp[i]);
+  }
+  for(int i=0;i<2;i++){
+    strcpy(temp2[i],cellchar[comptcolor][i]);
+    strcpy(cellchar[comptcolor][i],cellchar[comptplayer][i]);
+    strcpy(cellchar[comptplayer][i],temp2[i]);
+  }
 }
 
 void game(SDL_Surface *screen){
@@ -316,121 +399,3 @@ void test(SDL_Surface *screen){
   displayParagraphCenter(screen, text, 60, 6);
   waitEvent(menu, screen, 2);
 }
-
-/* ANCIEN CODE
-
-int part[6]={1,1,2,2,3,3};
-int nbplayers=3;
-
-framechar = "../img/Frame_2_2.png";
-part[0]=9; part[1]=1; part[2]=9; part[3]=9; part[4]=2; part[5]=9;
-nbplayers=2;
-
-void regles0(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", menu_main),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles1),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_0.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles1(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles0),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles2),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_1.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles2(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles1),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles3),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_2.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles3(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles2),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles4),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_3.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles4(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles3),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles5),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_4.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles5(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles4),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles6),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_5.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles6(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles5),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles7),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_6.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles7(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Back.png", regles6),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Next.png", regles8),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_7.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-
-void regles8(SDL_Surface *screen){
-  Button menu[3] = {
-
-    initButton((1*800/5 - 189/2), (800 - 120), "Ysolo", "../img/Button_Back.png", regles7),
-    initButton((4*800/5 - 189/2), (800 - 120), "Yolo", "../img/Button_Menu.png", menu_main),
-    initButton((800/2 - 174/2), (800/2 - 163/2), "Yolo", "../img/Rules_text_8.png", exit),
-
-  };
-  displayMenu(menu, screen, 3);
-  waitEvent(menu, screen, 3);
-}
-*/

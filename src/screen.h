@@ -11,18 +11,18 @@ SDL_Rect clickBoard(Dames game){
         case SDL_QUIT:
               SDL_Quit();
               exit(0);
-          case SDL_MOUSEBUTTONUP:
-            for(int i=0; i < (game.sizeBoardL); i++){
-              for(int j=0; j < (game.sizeBoardl); j++){
-                if (event.button.button == SDL_BUTTON_LEFT
-                    && event.button.x > game.board[i][j].pos.x
-                    && event.button.x < game.board[i][j].pos.x + game.board[i][j].cell->w
-                    && event.button.y > game.board[i][j].pos.y
-                    && event.button.y < game.board[i][j].pos.y + game.board[i][j].cell->h){
-                      pos.x = i;
-                      pos.y = j;
-                      return pos;
-                    }
+        case SDL_MOUSEBUTTONUP:
+          for(int i=0; i < (game.sizeBoardL); i++){
+            for(int j=0; j < (game.sizeBoardl); j++){
+              if (event.button.button == SDL_BUTTON_LEFT
+                  && event.button.x > game.board[i][j].pos.x
+                  && event.button.x < game.board[i][j].pos.x + 42
+                  && event.button.y > game.board[i][j].pos.y
+                  && event.button.y < game.board[i][j].pos.y + 49){
+                    pos.x = i;
+                    pos.y = j;
+                    return pos;
+                  }
               }
             }
       }
@@ -56,27 +56,27 @@ void updateBoard(Dames game, SDL_Surface *screen){
       game.board[i][j].pos.x = SCREEN_SHIFT_H + 42*i -21 + 2*i;
       game.board[i][j].pos.y = SCREEN_SHIFT_V + 49*j - 11*j;
       }
-      switch (game.board[i][j].player) {
+      switch (game.board[i][j].player){
         case 0:
-          game.board[i][j].cell = IMG_Load("../img/Cell_0.png");
-          break;
-        case 1:
           game.board[i][j].cell = IMG_Load(cellchar[0][0]);
           break;
-        case 2:
+        case 1:
           game.board[i][j].cell = IMG_Load(cellchar[1][0]);
           break;
-        case 3:
+        case 2:
           game.board[i][j].cell = IMG_Load(cellchar[2][0]);
           break;
-        case 4:
+        case 3:
           game.board[i][j].cell = IMG_Load(cellchar[3][0]);
           break;
-        case 5:
+        case 4:
           game.board[i][j].cell = IMG_Load(cellchar[4][0]);
           break;
-        case 6:
+        case 5:
           game.board[i][j].cell = IMG_Load(cellchar[5][0]);
+          break;
+        case 6:
+          game.board[i][j].cell = IMG_Load(cellchar[6][0]);
           break;
         case 8:
           game.board[i][j].cell = IMG_Load("../img/Cell_8.png");
@@ -85,26 +85,27 @@ void updateBoard(Dames game, SDL_Surface *screen){
         game.board[i][j].cell = IMG_Load("../img/Cell_9.png");
           break;
         case 11:
-          game.board[i][j].cell = IMG_Load(cellchar[0][1]);
-          break;
-        case 12:
           game.board[i][j].cell = IMG_Load(cellchar[1][1]);
           break;
-        case 13:
+        case 12:
           game.board[i][j].cell = IMG_Load(cellchar[2][1]);
           break;
-        case 14:
+        case 13:
           game.board[i][j].cell = IMG_Load(cellchar[3][1]);
           break;
-        case 15:
+        case 14:
           game.board[i][j].cell = IMG_Load(cellchar[4][1]);
           break;
-        case 16:
+        case 15:
           game.board[i][j].cell = IMG_Load(cellchar[5][1]);
+          break;
+        case 16:
+          game.board[i][j].cell = IMG_Load(cellchar[6][1]);
           break;
         default: game.board[i][j].cell = IMG_Load("../img/Cell_99.png");
       }
       SDL_BlitSurface(game.board[i][j].cell, NULL, screen, &game.board[i][j].pos);
+      SDL_FreeSurface(game.board[i][j].cell);
     }
   }
 displayFrame(screen);
@@ -122,6 +123,7 @@ void displayFrame(SDL_Surface *screen){
   pos.x = SCREEN_SHIFT_H -8;
   pos.y = SCREEN_SHIFT_V -6;
   SDL_BlitSurface(frame, NULL, screen, &pos);
+  SDL_FreeSurface(frame);
 }
 
 void updateGame(Dames game, SDL_Surface *screen){

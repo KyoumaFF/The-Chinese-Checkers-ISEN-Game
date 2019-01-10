@@ -3,7 +3,7 @@ typedef struct {
   SDL_Surface *surface;
   SDL_Rect pos;
   SDL_Color rgb;
-  void (*function)(SDL_Surface *screen);
+  void (*function)();
 } Button;
 
 
@@ -198,7 +198,6 @@ int waitEvent(Button menu[], SDL_Surface *screen, int nbButton){
       case SDL_MOUSEBUTTONUP:
         for(int i=0; i < nbButton; i++){
           if (clickButton(menu[i], event)){
-              //for(int j=0; j < nbButton; j++) SDL_FreeSurface(menu[j].surface);
               (*menu[i].function)(screen);
               break;
           }
