@@ -42,7 +42,6 @@ int waitEvent(Button menu[], SDL_Surface *screen, int nbButton);
 /* GLOBAL VAR */
 char *fontName = NULL;
 
-
 SDL_Color colorConverter(unsigned long hexValue) {
   SDL_Color rgbColor;
   rgbColor.r = ((hexValue >> 16) & 0xFF);  // Extract the RR byte
@@ -72,7 +71,6 @@ void displayColor(SDL_Surface *screen, int hexColor){
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, color.r, color.g, color.b));
   SDL_Flip(screen);
 }
-
 
 SDL_Surface *initText(char text[], int fontSize, int hexColorFont, int params){
   TTF_Font *font;
@@ -137,12 +135,7 @@ Button initButtonImg(int x, int y, char url[100], void (*function)()){
   return button;
 }
 
-Button initButtonRect(
-      int x, int y, int w, int h,
-      int hexColorRect, char text[], int fontSize, int hexColorFont,
-      int params, void (*function)()
-      ){
-
+Button initButtonRect(int x, int y, int w, int h,int hexColorRect, char text[], int fontSize, int hexColorFont,int params, void (*function)()){
 
   Button button;
   button.pos.x = x;
@@ -160,10 +153,8 @@ Button initButtonRect(
   return button;
 }
 
-
 void displayButton(Button button, SDL_Surface *screen){
   SDL_BlitSurface(button.surface, NULL, screen, &button.pos);
-  SDL_FreeSurface(button.surface);
   SDL_Flip(screen);
 }
 
@@ -183,7 +174,6 @@ int clickButton(Button button, SDL_Event event){
   return 0;
 }
 
-
 int waitEvent(Button menu[], SDL_Surface *screen, int nbButton){
   int loop = 1;
   SDL_Event event;
@@ -198,6 +188,7 @@ int waitEvent(Button menu[], SDL_Surface *screen, int nbButton){
       case SDL_MOUSEBUTTONUP:
         for(int i=0; i < nbButton; i++){
           if (clickButton(menu[i], event)){
+              for(int j=0; j<nbButton; j++){SDL_FreeSurface(menu[j].surface);}
               (*menu[i].function)(screen);
               break;
           }

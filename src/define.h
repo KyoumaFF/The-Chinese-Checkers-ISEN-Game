@@ -35,3 +35,5 @@ int comptmodeparts=1;
 int configDef;
 int comptcolor=1;
 int comptplayer=1;
+
+int pageRules = 0;

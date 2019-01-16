@@ -172,6 +172,7 @@ int winDames(Dames game, int part[6], int n){
     }
   }
   if(comptj==comptpion){
+    /*
     int victory[44]={4,0, 4,1, 3,2, 2,2, 1,2,
                       8,0, 9,1, 9,2, 10,2, 11,2,
                       0,8, 12,8,
@@ -179,7 +180,7 @@ int winDames(Dames game, int part[6], int n){
                       4,16, 4,15, 3,14, 2,14, 1,14};
     for(int i=0; i<22; i++){
       game.board[ victory[2*i] ] [ victory[1+(2*i)] ].player = n;
-    }
+    }*/
   return(1);
   }
 return(0);

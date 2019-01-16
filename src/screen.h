@@ -112,7 +112,7 @@ displayFrame(screen);
 }
 
 void updateScreen(SDL_Surface *screen){
-  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 210, 210, 210));
   SDL_Flip(screen);
 }
 
@@ -127,7 +127,7 @@ void displayFrame(SDL_Surface *screen){
 }
 
 void updateGame(Dames game, SDL_Surface *screen){
-  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 210, 210, 210));
   updateBoard(game, screen);
   SDL_Flip(screen);
 }
