@@ -1,12 +1,3 @@
-typedef struct {
-  char *text;
-  SDL_Surface *surface;
-  SDL_Rect pos;
-  SDL_Color rgb;
-  void (*function)();
-} Button;
-
-
 /* PROTOTYPAGE */
 SDL_Color colorConverter(unsigned long hexValue);
 
@@ -35,9 +26,6 @@ void displayMenu(Button menu[], SDL_Surface *screen, int nbButton);
 
 int clickButton(Button button, SDL_Event event);
 int waitEvent(Button menu[], SDL_Surface *screen, int nbButton);
-
-
-
 
 /* GLOBAL VAR */
 char *fontName = NULL;

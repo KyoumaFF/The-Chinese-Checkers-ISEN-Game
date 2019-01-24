@@ -1,4 +1,4 @@
-SDL_Rect clickBoard(Dames game){
+SDL_Rect clickBoard(Dames game, SDL_Surface *screen){
   int pursue = 1;
   SDL_Event event;
   SDL_Rect pos;
@@ -12,6 +12,8 @@ SDL_Rect clickBoard(Dames game){
               SDL_Quit();
               exit(0);
         case SDL_MOUSEBUTTONUP:
+          if (event.button.button == SDL_BUTTON_LEFT && event.button.x > 40 && event.button.x < (40+189) && event.button.y > (screen->h-40-90) && event.button.y < (screen->h-40)){menu_main(screen);}
+          else{
           for(int i=0; i < (game.sizeBoardL); i++){
             for(int j=0; j < (game.sizeBoardl); j++){
               if (event.button.button == SDL_BUTTON_LEFT
@@ -25,6 +27,7 @@ SDL_Rect clickBoard(Dames game){
                   }
               }
             }
+        }
       }
   }
 }
@@ -78,11 +81,14 @@ void updateBoard(Dames game, SDL_Surface *screen){
         case 6:
           game.board[i][j].cell = IMG_Load(cellchar[6][0]);
           break;
+        case 7:
+          game.board[i][j].cell = IMG_Load("../img/Cell_7.png");
+          break;
         case 8:
           game.board[i][j].cell = IMG_Load("../img/Cell_8.png");
           break;
         case 9:
-        game.board[i][j].cell = IMG_Load("../img/Cell_9.png");
+        game.board[i][j].cell = IMG_Load("../img/Cell_9.png");//IMG_Load(cellchar[6][0]);
           break;
         case 11:
           game.board[i][j].cell = IMG_Load(cellchar[1][1]);
@@ -108,7 +114,19 @@ void updateBoard(Dames game, SDL_Surface *screen){
       SDL_FreeSurface(game.board[i][j].cell);
     }
   }
-displayFrame(screen);
+  displayFrame(screen);
+}
+
+void updateInfoTour(int n, SDL_Surface *screen){
+  char text_nb[2];
+  sprintf(text_nb, "%d", n);
+
+  SDL_Surface *text_nbplayers = initText("Au tour du joueur :", 24, 0x000000, TTF_STYLE_NORMAL);
+  SDL_Surface *text2_nbplayers = initText(text_nb, 24, 0x000000, TTF_STYLE_NORMAL);
+  displayText(screen, text_nbplayers, 40 , 100);
+  displayText(screen, text2_nbplayers, 240 , 101);
+  displayImg(screen, 40, screen->h - 40 - 90, "../img/Button_Back.png");
+  displayImg(screen, 262, 90, cellchar[n][0]);
 }
 
 void updateScreen(SDL_Surface *screen){

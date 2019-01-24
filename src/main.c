@@ -6,9 +6,10 @@
 #include "define.h"
 #include "proto.h"
 #include "screen.h"
-#include "game.h"
 #include "menu.h"
 #include "menu_config.h"
+#include "game.h"
+#include "IA.h"
 
 // clear && gcc main.c `sdl-config --cflags --libs` -lSDL_image  && ./a.out
 

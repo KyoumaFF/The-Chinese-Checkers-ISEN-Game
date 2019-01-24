@@ -196,24 +196,26 @@ int turnByTurn(Dames game,int nbplayers, int part[6], SDL_Surface *screen){
     SDL_Rect start; //empeche de revenir au meme tableau
 
     updateGame(game, screen);
-
+    updateInfoTour(n, screen);
     //On chosit une première case
     do{
-      pos = clickBoard(game);
+      pos = clickBoard(game, screen);
     }while(game.board[pos.x][pos.y].player != n);
 
     game.board[pos.x][pos.y].player = n+10;
     updateGame(game, screen);
+    updateInfoTour(n, screen);
 
     int jump = -1;
     do{
       potential_Moves(game, pos, jump);
       updateGame(game, screen);
+      updateInfoTour(n, screen);
 
       //Si c'est le premier jump
       if(jump == -1){
         do{
-          temp=clickBoard(game);
+          temp=clickBoard(game, screen);
         }while(game.board[temp.x][temp.y].player != 8 && game.board[temp.x][temp.y].player != n );
 
         //Si on choisit une autre case finalement
@@ -236,6 +238,7 @@ int turnByTurn(Dames game,int nbplayers, int part[6], SDL_Surface *screen){
           pos = temp;
           game.board[pos.x][pos.y].player = n+10;
           updateGame(game, screen);
+          updateInfoTour(n, screen);
           }
           clearGreyCells(game);
         }
@@ -244,7 +247,7 @@ int turnByTurn(Dames game,int nbplayers, int part[6], SDL_Surface *screen){
       //Si c'est pas le premier jump
       else{
         do{
-          temp=clickBoard(game);
+          temp=clickBoard(game, screen);
         }while(game.board[temp.x][temp.y].player != 8 && game.board[temp.x][temp.y].player != (n+10) );
 
         //Si on s'arrete à sa position
@@ -268,9 +271,7 @@ int turnByTurn(Dames game,int nbplayers, int part[6], SDL_Surface *screen){
 return(n);
 }
 
-/*
 void freeDames(Dames cell){
-  free(cell);
-  cell = NULL;
+  free(cell.board);
+  cell.board = NULL;
 }
-*/
