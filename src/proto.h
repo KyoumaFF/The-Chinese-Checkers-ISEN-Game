@@ -101,3 +101,12 @@ void displayMenu(Button menu[], SDL_Surface *screen, int nbButton);
 
 int clickButton(Button button, SDL_Event event);
 int waitEvent(Button menu[], SDL_Surface *screen, int nbButton);
+
+//IA
+Dames copyDames(Dames boardtocopy);
+void TableauTaillePionsInit(Dames* TableauTaillePions, Dames TabInit);
+int griserTabPions(Dames *TableauTaillePions, int playerIA);
+void TableauTailleGrisInit(Dames* TableauTailleGris, Dames* TableauTaillePions, int nbgris);
+void playgris(Dames* TableauTailleGris, Dames* TableauTaillePions);
+int turnByTurnIA(Dames game,int nbplayers, int part[6], SDL_Surface *screen);
+void turnIA(int playerIA, Dames TabInit);
